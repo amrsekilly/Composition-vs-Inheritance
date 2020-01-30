@@ -18,42 +18,58 @@ function jump(name) {
   console.log(`${name} jumps`);
 }
 
-function livingBeing(name) {
-  return {
-    eat: () => eat(name),
-    drink: () => drink(name)
-  };
+function swim(name) {
+  console.log(`${name} swims`);
 }
 
-function bearCreator(name) {
+function livingBeingCreator(name) {
   return {
-    ...livingBeing(name),
-    hibernate: () => hibernate(name)
+    eat: () => eat(name),
+    drink: () => drink(name),
+    sleep: () => sleep(name)
   };
 }
 
 function monkeyCreator(name) {
   return {
-    ...livingBeing(name),
+    ...livingBeingCreator(name),
     jump: () => jump(name)
+  };
+}
+
+function bearCreator(name) {
+  return {
+    ...livingBeingCreator(name),
+    hibernate: () => hibernate(name)
   };
 }
 
 function frogCreator(name) {
   return {
-    ...livingBeing,
+    ...livingBeingCreator(name),
+    hibernate: () => hibernate(name),
     jump: () => jump(name),
-    hibernate: () => hibernate(name)
+    swim: () => swim(name)
   };
 }
 
-const bob = bearCreator("Bob");
-const Monkeeyyyy = monkeyCreator("Monkeeyyyy");
-const Froggy = new frogCreator("Froggy");
+const Bob = monkeyCreator("Bob");
+const Bearrr = bearCreator("Bearrr");
+const Frogy = frogCreator("Frogy");
 
-bob.drink();
-bob.hibernate();
-Froggy.hibernate();
-Froggy.jump();
+Bob.eat();
+Bob.drink();
+Bob.sleep();
+Bob.jump();
 
-Monkeeyyyy.jump();
+Bearrr.eat();
+Bearrr.drink();
+Bearrr.sleep();
+Bearrr.hibernate();
+
+Frogy.eat();
+Frogy.drink();
+Frogy.sleep();
+Frogy.hibernate();
+Frogy.swim();
+Frogy.jump();
