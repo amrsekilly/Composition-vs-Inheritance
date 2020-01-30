@@ -1,42 +1,55 @@
-class LivingBeing {
-  constructor(name) {
-    this.name = name;
-  }
-
-  eat() {
-    console.log(`${this.name} eats`);
-  }
-
-  drink() {
-    console.log(`${this.name} drinks`);
-  }
-
-  sleep() {
-    console.log(`${this.name} sleeps`);
-  }
-
-  hibernate() {
-    console.log(`${this.name} hibernates`);
-  }
+function eat(name) {
+  console.log(`${name} eats`);
 }
 
-class Bear extends LivingBeing {
-  hibernate() {
-    console.log(`${this.name} hibernates`);
-  }
+function drink(name) {
+  console.log(`${name} drinks`);
 }
 
-class Monkey extends LivingBeing {
-  jump() {
-    console.log(`${this.name} jumps`);
-  }
+function sleep(name) {
+  console.log(`${name} sleeps`);
 }
 
-class Frog extends Monkey {}
+function hibernate(name) {
+  console.log(`${name} hibernates`);
+}
 
-const bob = new Bear("Bob");
-const Monkeeyyyy = new Monkey("Monkeeyyyy");
-const Froggy = new Frog("Froggy");
+function jump(name) {
+  console.log(`${name} jumps`);
+}
+
+function livingBeing(name) {
+  return {
+    eat: () => eat(name),
+    drink: () => drink(name)
+  };
+}
+
+function bearCreator(name) {
+  return {
+    ...livingBeing(name),
+    hibernate: () => hibernate(name)
+  };
+}
+
+function monkeyCreator(name) {
+  return {
+    ...livingBeing(name),
+    jump: () => jump(name)
+  };
+}
+
+function frogCreator(name) {
+  return {
+    ...livingBeing,
+    jump: () => jump(name),
+    hibernate: () => hibernate(name)
+  };
+}
+
+const bob = bearCreator("Bob");
+const Monkeeyyyy = monkeyCreator("Monkeeyyyy");
+const Froggy = new frogCreator("Froggy");
 
 bob.drink();
 bob.hibernate();
